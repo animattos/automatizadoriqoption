@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,10 +17,32 @@
         <h1>Automatizador de Sinais</h1>
         <p>Nota: Este é apenas um simulador para ajudar a visualizar a progressão das apostas com base na estratégia Martingale. Não automatiza negociações reais na plataforma IQ Option.</p>
 
-        <!-- New element to display fixed Initial Balance -->
+        <!-- Updated element to display Fixed Initial Balance and new summary stats -->
         <div id="initial-balance-display" class="highlight-balance">
-            <span>Banca Inicial:</span>
-            <span id="fixed-initial-balance-value">0.00</span>
+            <div class="summary-item">
+                <span id="fixed-initial-balance-value" class="value">0.00</span>
+                <span class="label">SALDO INICIAL</span>
+            </div>
+            <div class="summary-item">
+                <span id="current-balance-display" class="value">0.00</span>
+                <span class="label">SALDO ATUAL</span>
+            </div>
+            <div class="summary-item">
+                <span id="net-profit-display" class="value">0.00</span>
+                <span class="label">LUCRO TOTAL</span>
+            </div>
+             <div class="summary-item">
+                 <span id="executed-count-display" class="value">0</span>
+                 <span class="label">EXECUTADAS</span>
+             </div>
+             <div class="summary-item">
+                 <span id="win-count-display" class="value">0</span>
+                 <span class="label">VITÓRIAS</span>
+             </div>
+             <div class="summary-item">
+                 <span id="loss-count-display" class="value">0</span>
+                 <span class="label">DERROTAS</span>
+             </div>
         </div>
 
         <!-- Moved Account Type Selection here, outside the grid -->
@@ -85,11 +106,13 @@
             </div>
         </div>
 
+        <!-- Keeping the summary area at the bottom for now -->
         <div id="summary-area">
-            <h2>Resumo</h2>
+            <h2>Resumo Detalhado (Duplicado Acima)</h2>
             <p>Banca Atual na Simulação: $<span id="current-balance">0.00</span></p>
             <p>Total Investido nesta Simulação: $<span id="total-invested">0.00</span></p>
             <p>Lucro/Prejuízo Líquido nesta Simulação: $<span id="net-profit" class="profit">0.00</span></p>
+            <!-- Add counts here if desired, but user image only shows them at the top -->
         </div>
     </div>
 
