@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IQ Option Martingale Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "script": "./script.js"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Automatizador de Sinais</h1>
+        <p>Nota: Este é apenas um simulador para ajudar a visualizar a progressão das apostas com base na estratégia Martingale. Não automatiza negociações reais na plataforma IQ Option.</p>
+
+        <!-- New element to display fixed Initial Balance -->
+        <div id="initial-balance-display" class="highlight-balance">
+            <span>Banca Inicial:</span>
+            <span id="fixed-initial-balance-value">0.00</span>
+        </div>
+
+        <!-- Moved Account Type Selection here, outside the grid -->
+        <div class="input-group account-type-group">
+             <label>Tipo de Conta:</label>
+             <div class="account-type-selection">
+                 <label><input type="radio" name="account-type" value="training" checked> Conta treinamento</label>
+                 <label><input type="radio" name="account-type" value="real"> Conta Real</label>
+             </div>
+         </div>
+
+        <div class="input-sections-grid">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="initial-stake">Aposta Inicial ($):</label>
+                    <input type="number" id="initial-stake" value="10" min="1" step="0.01">
+                </div>
+
+                <div class="input-group">
+                    <label for="payout-percentage">Payout (%):</label>
+                    <input type="number" id="payout-percentage" value="85" min="1" max="100" step="1">
+                </div>
+
+                 <div class="input-group">
+                    <label for="max-gales">Número Máximo de Gales:</label>
+                    <input type="number" id="max-gales" value="5" min="0" max="10" step="1">
+                </div>
+
+                 <div class="input-group">
+                     <label for="entry-delay">Entrar com quantos segundos antes:</label>
+                     <input type="number" id="entry-delay" value="5" min="0" step="1">
+                 </div>
+            </div>
+
+            <!-- Removed the account type input group from this section -->
+             <div class="input-section">
+                 <!-- This section can now be used for other inputs or removed if empty -->
+                 <!-- It currently contains only the removed account type section -->
+                 <!-- Keeping it for now, structure might be needed for future additions -->
+            </div>
+        </div>
+
+        <div id="gale-stakes-input-group" class="input-group">
+            <label>Valores de Entrada para cada Gale ($):</label>
+            <div id="gale-stakes">
+                <!-- Gale stake inputs will be dynamically generated here -->
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="signals-list">Lista de Sinais (um por linha):</label>
+            <textarea id="signals-list" rows="10" placeholder="Cole seus sinais aqui, um por linha. Formato esperado: PAR HH:MM DIREÇÃO (Ex: EUR/USD 06:15 CALL)"></textarea>
+        </div>
+
+        <button id="simulate-btn">Simular Sequência</button>
+
+        <div id="results-area">
+            <h2>Resultado da Simulação</h2>
+            <div id="simulation-results">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+
+        <div id="summary-area">
+            <h2>Resumo</h2>
+            <p>Banca Atual na Simulação: $<span id="current-balance">0.00</span></p>
+            <p>Total Investido nesta Simulação: $<span id="total-invested">0.00</span></p>
+            <p>Lucro/Prejuízo Líquido nesta Simulação: $<span id="net-profit" class="profit">0.00</span></p>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

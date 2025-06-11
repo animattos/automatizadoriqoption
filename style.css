@@ -1,0 +1,442 @@
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    display: flex; /* Use flexbox for main sections */
+    flex-direction: column; /* Stack sections vertically */
+    gap: 20px; /* Add space between sections */
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* New style for the fixed initial balance display */
+#initial-balance-display {
+    text-align: center; /* Center the text */
+    margin-bottom: 20px; /* Space below the display */
+    padding: 15px;
+    background-color: #e0f7fa; /* Light blue background */
+    border: 1px solid #b2ebf2; /* Lighter cyan border */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    font-size: 1.2em; /* Slightly larger font */
+    display: flex; /* Use flex to align label and value */
+    justify-content: center; /* Center content horizontally */
+    align-items: center;
+    gap: 10px; /* Space between label and value */
+}
+
+#initial-balance-display span:first-child {
+    font-weight: bold;
+    color: #007788; /* Darker cyan color for label */
+}
+
+#fixed-initial-balance-value {
+    font-size: 1.8em; /* Make the value much larger */
+    font-weight: bold;
+    color: #5cb85c; /* Green color */
+}
+
+/* Style for the moved account type group */
+.account-type-group {
+    /* Add some margin if needed, gap in container handles vertical spacing */
+    margin-bottom: 0; /* container gap handles spacing */
+    padding: 0; /* Remove padding if not needed */
+}
+
+/* New grid layout for top input sections */
+.input-sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Two columns, wrap if needed */
+    gap: 20px; /* Gap between grid items */
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Gap between input groups within a section */
+}
+
+.input-group {
+    margin-bottom: 0; /* Remove margin bottom if using gap in parent */
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.input-group input[type="number"],
+.input-group textarea {
+    width: calc(100% - 22px); /* Adjust for padding and border */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Style for account type radio buttons */
+.account-type-selection {
+    display: flex;
+    gap: 15px; /* Space between radio button labels */
+    align-items: center;
+    margin-top: 5px; /* Add some space below the main label */
+}
+
+.account-type-selection label {
+    font-weight: normal; /* Labels for individual radios don't need to be bold */
+    margin-bottom: 0;
+}
+
+.account-type-selection input[type="radio"] {
+    margin-right: 5px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Add some space above the button */
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#results-area {
+    margin-top: 10px; /* Adjust margin top */
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+/* Styles for simulation steps */
+.simulation-step {
+    background-color: #fff; /* White background */
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border-left: 5px solid #aaa; /* Default grey border for pending */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08); /* Subtle shadow */
+}
+
+.simulation-step.loss {
+    border-left-color: #d9534f; /* Red border for loss */
+}
+
+.simulation-step.win {
+     border-left-color: #5cb85c; /* Green border for win (changed from blue to match image) */
+}
+
+/* Style for a step that starts a new sequence (after win or exceeding max gales) */
+.simulation-step.new-sequence {
+    border-left-color: #f0ad4e; /* Warning orange */
+}
+
+/* Style for a step that is untradeable due to exceeding max gales or invalid stake */
+.simulation-step.untradeable {
+    border-left-color: #d9534f; /* Red border */
+    opacity: 0.7; /* Slightly dim */
+}
+
+.simulation-step .step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.simulation-step .step-index {
+    color: #333;
+}
+
+.simulation-step .gale-level-display {
+    font-weight: normal;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.simulation-step .trade-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #eee;
+}
+
+.simulation-step .signal-info {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between pair, time, arrow */
+    font-size: 1.2em;
+}
+
+.simulation-step .currency-pair {
+    font-weight: bold;
+    color: #333;
+}
+
+.simulation-step .entry-time {
+     color: #555;
+}
+
+.simulation-step .direction-arrow {
+    font-size: 1.5em; /* Larger arrow */
+}
+
+.simulation-step .direction-arrow.arrow-call {
+    color: #5cb85c; /* Green */
+}
+
+.simulation-step .direction-arrow.arrow-put {
+    color: #d9534f; /* Red */
+}
+
+.simulation-step .trade-values {
+     text-align: right;
+}
+
+.simulation-step .trade-values p {
+     margin: 0;
+     font-size: 1em;
+     color: #555;
+}
+
+.simulation-step .stake-value {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Progress bar area */
+.progress-container {
+    margin-bottom: 10px;
+}
+
+.progress-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: normal; /* Not bold */
+    color: #555;
+    font-size: 0.9em;
+}
+
+.progress-bar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-bar {
+    flex-grow: 1; /* Bar takes up available space */
+    height: 8px;
+    background-color: #ddd; /* Grey background for the track */
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Style for the "filled" part of the bar - static representation */
+.progress-bar::before {
+    content: '';
+    display: block;
+    width: 60%; /* Example: 60% filled when pending */
+    height: 100%;
+    background-color: #5bc0de; /* Info blue color for progress (matches image) */
+    border-radius: 4px;
+}
+
+/* Hide the progress bar when not pending */
+.simulation-step:not(.pending) .progress-bar {
+    display: none;
+}
+
+.simulation-step .status-text {
+    font-weight: bold;
+    min-width: 120px; /* Give status text a minimum width to align */
+    text-align: right; /* Align status text to the right */
+}
+
+/* Status colors */
+.simulation-step.pending .status-text {
+    color: #555; /* Greyish for pending */
+}
+
+.simulation-step.win .status-text {
+    color: #5cb85c; /* Green for win */
+}
+
+.simulation-step.loss .status-text {
+    color: #d9534f; /* Red for loss */
+}
+
+.simulation-step.untradeable .status-text {
+    color: #d9534f; /* Red for untradeable */
+}
+
+
+.simulation-step .step-balance {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 10px; /* Added space below progress/status */
+    text-align: right; /* Align balance to the right */
+}
+
+.simulation-step .balance-value {
+    font-weight: bold;
+    color: #333; /* Default color */
+}
+
+.simulation-step.win .balance-value {
+    color: #5cb85c; /* Green for balance after win */
+}
+
+.simulation-step.loss .balance-value {
+     color: #d9534f; /* Red for balance after loss */
+}
+
+
+.trade-outcome-buttons {
+    /* Removed as buttons are removed */
+    /*
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    */
+}
+
+
+.trade-outcome-buttons button {
+    /* Removed as buttons are removed */
+    /*
+    width: auto;
+    padding: 8px 15px;
+    font-size: 0.9em;
+    margin: 0;
+    */
+}
+/* Removed individual button styles */
+/*
+.trade-outcome-buttons button.win { ... }
+.trade-outcome-buttons button.win:hover { ... }
+.trade-outcome-buttons button.loss { ... }
+.trade-outcome-buttons button.loss:hover { ... }
+.trade-outcome-buttons button:disabled { ... }
+*/
+
+/* Hide buttons if the step is untradeable - This style is no longer needed
+   as the entire container is removed in HTML */
+/*
+.simulation-step.untradeable .trade-outcome-buttons {
+    display: none;
+}
+*/
+
+
+#summary-area {
+    margin-top: 10px; /* Adjust margin top */
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+#summary-area h2 {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+#summary-area p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+#net-profit.profit {
+    color: #5cb85c; /* Green */
+    font-weight: bold;
+}
+
+#net-profit.loss {
+    color: #d9534f; /* Red */
+    font-weight: bold;
+}
+
+#current-balance {
+    font-weight: bold; /* Make balance value bold */
+}
+
+#gale-stakes-input-group {
+    margin-bottom: 10px; /* Adjust margin */
+}
+
+#gale-stakes-input-group label {
+    display: block;
+    margin-bottom: 10px; /* Increased margin */
+    font-weight: bold;
+    color: #555;
+}
+
+#gale-stakes {
+    display: flex; /* Use flexbox to arrange items */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 10px; /* Add space between flex items */
+    align-items: flex-start; /* Align items to the top */
+}
+
+.gale-input-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically */
+    align-items: flex-start; /* Align contents to the start */
+    gap: 3px; /* Small gap between label and input */
+}
+
+.gale-input-wrapper label {
+    font-size: 0.9em; /* Smaller font for gale labels */
+    font-weight: normal; /* Not bold */
+    margin-bottom: 0; /* Remove margin-bottom from label */
+}
+
+#gale-stakes input[type="number"] {
+    /* Adjusted width and removed full width calc */
+    width: 70px; /* Make inputs smaller */
+    padding: 5px; /* Adjusted padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em; /* Slightly smaller font */
+    margin-bottom: 0; /* Remove bottom margin if using gap */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
