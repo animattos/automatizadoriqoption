@@ -6,6 +6,8 @@ const accountTypeInputs = document.querySelectorAll('input[name="account-type"]'
 const signalsListTextarea = document.getElementById('signals-list');
 const simulateBtn = document.getElementById('simulate-btn');
 const simulationResultsDiv = document.getElementById('simulation-results');
+const resultsAreaDiv = document.getElementById('results-area'); // Get the results area container
+const summaryAreaDiv = document.getElementById('summary-area'); // Get the summary area container
 
 // Existing elements for bottom summary (keeping for now)
 const totalInvestedSpan = document.getElementById('total-invested');
@@ -34,13 +36,17 @@ netProfitDisplaySpan.textContent = (0.00).toFixed(2);
 executedCountDisplaySpan.textContent = '0';
 winCountDisplaySpan.textContent = '0'; // Will remain 0 without outcome processing
 lossCountDisplaySpan.textContent = '0'; // Will remain 0 without outcome processing
-netProfitDisplaySpan.classList.remove('profit', 'loss'); // Ensure no initial classes
+netProfitDisplaySpan.classList.remove('profit', 'loss');
 
 // Initialize the bottom summary balance display (keeping for now)
 currentBalanceSpan.textContent = fixedInitialBalance.toFixed(2);
 totalInvestedSpan.textContent = '0.00';
 netProfitSpan.textContent = '0.00';
 netProfitSpan.classList.remove('profit', 'loss');
+
+// Hide results and summary areas on initial load
+resultsAreaDiv.classList.add('hidden');
+summaryAreaDiv.classList.add('hidden');
 
 simulateBtn.addEventListener('click', simulateMartingale);
 
@@ -155,8 +161,16 @@ function simulateMartingale() {
         lossCountDisplaySpan.textContent = '0'; // Top summary
         netProfitDisplaySpan.classList.remove('profit', 'loss');
 
+        // Hide results and summary areas again if no signals
+        resultsAreaDiv.classList.add('hidden');
+        summaryAreaDiv.classList.add('hidden');
+
         return;
     }
+
+    // Show results and summary areas before displaying results
+    resultsAreaDiv.classList.remove('hidden');
+    summaryAreaDiv.classList.remove('hidden');
 
     simulationResultsDiv.innerHTML = ''; // Clear previous results
 
@@ -496,15 +510,3 @@ function recalculateFromIndex(startIndex) {
          netProfitDisplaySpan.classList.remove('profit', 'loss');
      }
 }
-
-// Initial summary balance display using the fixed value
-// This is done once on script load
-currentBalanceSpan.textContent = fixedInitialBalance.toFixed(2); // Bottom
-currentBalanceDisplaySpan.textContent = fixedInitialBalance.toFixed(2); // Top
-totalInvestedSpan.textContent = '0.00'; // Bottom
-netProfitSpan.textContent = '0.00'; // Bottom
-executedCountDisplaySpan.textContent = '0'; // Top
-winCountDisplaySpan.textContent = '0'; // Top
-lossCountDisplaySpan.textContent = '0'; // Top
-netProfitSpan.classList.remove('profit', 'loss'); // Bottom
-netProfitDisplaySpan.classList.remove('profit', 'loss'); // Top

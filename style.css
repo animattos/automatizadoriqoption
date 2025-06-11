@@ -163,6 +163,11 @@ button:disabled {
     padding-top: 20px;
 }
 
+/* Add hidden class */
+.hidden {
+    display: none;
+}
+
 /* Styles for simulation steps */
 .simulation-step {
     background-color: #fff; /* White background */
