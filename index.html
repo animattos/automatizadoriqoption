@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Alta Chance</title>
+    <title>IQ Option Martingale Simulator</title>
     <link rel="stylesheet" href="style.css">
     <script type="importmap">
         {
@@ -15,35 +14,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Sistema Alta Chance</h1>
-        <div style="text-align: center;">sinais de alta precisão com estratégias validadas para executar com confiança e alta taxa de acerto.</div>
+        <h1>Simulador de Martingale para IQ Option</h1>
+        <p>Nota: Este é apenas um simulador para ajudar a visualizar a progressão das apostas com base na estratégia Martingale. Não automatiza negociações reais na plataforma IQ Option.</p>
 
-        <!-- Updated element to display Fixed Initial Balance and new summary stats -->
+        <!-- New element to display fixed Initial Balance -->
         <div id="initial-balance-display" class="highlight-balance">
-            <div class="summary-item">
-                <span id="fixed-initial-balance-value" class="value">0.00</span>
-                <span class="label">SALDO INICIAL</span>
-            </div>
-            <div class="summary-item">
-                <span id="current-balance-display" class="value">0.00</span>
-                <span class="label">SALDO ATUAL</span>
-            </div>
-            <div class="summary-item">
-                <span id="net-profit-display" class="value">0.00</span>
-                <span class="label">LUCRO TOTAL</span>
-            </div>
-             <div class="summary-item">
-                 <span id="executed-count-display" class="value">0</span>
-                 <span class="label">EXECUTADAS</span>
-             </div>
-             <div class="summary-item">
-                 <span id="win-count-display" class="value">0</span>
-                 <span class="label">VITÓRIAS</span>
-             </div>
-             <div class="summary-item">
-                 <span id="loss-count-display" class="value">0</span>
-                 <span class="label">DERROTAS</span>
-             </div>
+            <span>Banca Inicial:</span>
+            <span id="fixed-initial-balance-value">0.00</span>
         </div>
 
         <!-- Moved Account Type Selection here, outside the grid -->
@@ -59,7 +36,7 @@
             <div class="input-section">
                 <div class="input-group">
                     <label for="initial-stake">Aposta Inicial ($):</label>
-                    <input type="number" id="initial-stake" value="5" min="1" step="0.01">
+                    <input type="number" id="initial-stake" value="10" min="1" step="0.01">
                 </div>
 
                 <div class="input-group">
@@ -69,12 +46,12 @@
 
                  <div class="input-group">
                     <label for="max-gales">Número Máximo de Gales:</label>
-                    <input type="number" id="max-gales" value="4" min="0" max="12" step="1">
+                    <input type="number" id="max-gales" value="5" min="0" max="10" step="1">
                 </div>
 
                  <div class="input-group">
                      <label for="entry-delay">Entrar com quantos segundos antes:</label>
-                     <input type="number" id="entry-delay" value="1" min="0" step="1">
+                     <input type="number" id="entry-delay" value="5" min="0" step="1">
                  </div>
             </div>
 
@@ -98,22 +75,20 @@
             <textarea id="signals-list" rows="10" placeholder="Cole seus sinais aqui, um por linha. Formato esperado: PAR HH:MM DIREÇÃO (Ex: EUR/USD 06:15 CALL)"></textarea>
         </div>
 
-        <button id="simulate-btn">Executar Sinais</button>
+        <button id="simulate-btn">Simular Sequência</button>
 
-        <div id="results-area" class="hidden">
+        <div id="results-area">
             <h2>Resultado da Simulação</h2>
             <div id="simulation-results">
                 <!-- Results will be displayed here -->
             </div>
         </div>
 
-        <!-- Keeping the summary area at the bottom for now -->
-        <div id="summary-area" class="hidden">
-            <h2>Resumo Detalhado (Duplicado Acima)</h2>
+        <div id="summary-area">
+            <h2>Resumo</h2>
             <p>Banca Atual na Simulação: $<span id="current-balance">0.00</span></p>
             <p>Total Investido nesta Simulação: $<span id="total-invested">0.00</span></p>
             <p>Lucro/Prejuízo Líquido nesta Simulação: $<span id="net-profit" class="profit">0.00</span></p>
-            <!-- Add counts here if desired, but user image only shows them at the top -->
         </div>
     </div>
 

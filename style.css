@@ -27,51 +27,32 @@ h1, h2 {
     color: #333;
 }
 
-/* Updated style for the initial balance display to include new stats */
+/* New style for the fixed initial balance display */
 #initial-balance-display {
-    text-align: center; /* Center the block */
+    text-align: center; /* Center the text */
     margin-bottom: 20px; /* Space below the display */
     padding: 15px;
     background-color: #e0f7fa; /* Light blue background */
     border: 1px solid #b2ebf2; /* Lighter cyan border */
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    font-size: 1em; /* Base font size */
-    display: flex; /* Use flex to arrange items horizontally */
-    justify-content: space-around; /* Distribute space evenly */
-    align-items: flex-start; /* Align items to the top */
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-    gap: 15px; /* Gap between flex items */
+    font-size: 1.2em; /* Slightly larger font */
+    display: flex; /* Use flex to align label and value */
+    justify-content: center; /* Center content horizontally */
+    align-items: center;
+    gap: 10px; /* Space between label and value */
 }
 
-.summary-item {
-    display: flex;
-    flex-direction: column; /* Stack value and label vertically */
-    align-items: center; /* Center content */
-    min-width: 80px; /* Minimum width for each item to help alignment */
-}
-
-.summary-item .value {
-    font-size: 1.5em; /* Make the value much larger */
+#initial-balance-display span:first-child {
     font-weight: bold;
-    margin-bottom: 5px; /* Space between value and label */
-}
-
-.summary-item .label {
-    font-weight: normal; /* Labels are not bold */
     color: #007788; /* Darker cyan color for label */
-    font-size: 0.8em; /* Smaller font for labels */
 }
 
-/* Specific colors for values matching the image */
-#fixed-initial-balance-value { color: #000080; } /* Dark Blue */
-#current-balance-display { color: #5cb85c; } /* Green */
-#net-profit-display { color: #5cb85c; } /* Green (for profit) */
-#net-profit-display.loss { color: #d9534f; } /* Red (for loss) */
-#executed-count-display { color: #000080; } /* Dark Blue */
-#win-count-display { color: #5cb85c; } /* Green */
-#loss-count-display { color: #d9534f; } /* Red */
-
+#fixed-initial-balance-value {
+    font-size: 1.8em; /* Make the value much larger */
+    font-weight: bold;
+    color: #5cb85c; /* Green color */
+}
 
 /* Style for the moved account type group */
 .account-type-group {
@@ -161,11 +142,6 @@ button:disabled {
     margin-top: 10px; /* Adjust margin top */
     border-top: 1px solid #eee;
     padding-top: 20px;
-}
-
-/* Add hidden class */
-.hidden {
-    display: none;
 }
 
 /* Styles for simulation steps */
@@ -305,17 +281,10 @@ button:disabled {
     border-radius: 4px;
 }
 
-/* Hide the progress bar when not pending or untradeable */
-/* Modified to hide progress bar if not pending AND not untradeable */
-/* If untradeable, the bar shouldn't show either, but the status text changes */
-/* Let's only show it if pending AND tradeable */
-.simulation-step:not(.pending) .progress-container {
-    display: none; /* Hide the entire progress container */
+/* Hide the progress bar when not pending */
+.simulation-step:not(.pending) .progress-bar {
+    display: none;
 }
-.simulation-step.untradeable .progress-container {
-    display: none; /* Also hide if untradeable */
-}
-
 
 .simulation-step .status-text {
     font-weight: bold;
@@ -338,7 +307,6 @@ button:disabled {
 
 .simulation-step.untradeable .status-text {
     color: #d9534f; /* Red for untradeable */
-    font-weight: normal; /* Not bold if untradeable? Matches image roughly. */
 }
 
 
